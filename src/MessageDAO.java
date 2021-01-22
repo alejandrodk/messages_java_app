@@ -39,9 +39,9 @@ public class MessageDAO {
                 rs = ps.executeQuery();
 
                 while(rs.next()) {
-                    int id = rs.getInt("id");
-                    String message = rs.getString("message");
-                    String author = rs.getString("author");
+                    int id = rs.getInt(Entity.id.toString());
+                    String message = rs.getString(Entity.message.toString());
+                    String author = rs.getString(Entity.author.toString());
                     result.add(new Message(id, message, author));
                 }
                 return result;
