@@ -5,7 +5,8 @@ import java.sql.SQLException;
 public class MessageDAO {
 
     public static void createMessage(Message message) {
-        try (Connection conn = DBConnection.get_connection()){
+        DBConnection connection = new DBConnection();
+        try (Connection conn = connection.get_connection()){
             PreparedStatement ps = null;
             try {
                 String query = "INSERT INTO mensajes (message, author) VALUES (?,?)";
