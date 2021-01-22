@@ -1,6 +1,9 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MessageDAO {
 
@@ -23,8 +26,32 @@ public class MessageDAO {
         }
     }
 
-    public static void readMessages() {
+    public static List<Message> readMessages() {
+        DBConnection connection = new DBConnection();
+        try (Connection conn = connection.get_connection()){
+            PreparedStatement ps = null;
+            ResultSet rs = null;
 
+            List<Message> result = new ArrayList<>();
+            try {
+                String query = "SELECT * FROM mensajes";
+                ps = conn.prepareStatement(query);
+                rs = ps.executeQuery();
+
+                while(rs.next()) {
+                    int id = rs.getInt("id");
+                    String message = rs.getString("message");
+                    String author = rs.getString("author");
+                    result.add(new Message(id, message, author));
+                }
+                return result;
+            } catch(SQLException exception) {
+                System.out.println(exception);
+            }
+        } catch(SQLException error){
+            System.out.println(error);
+        }
+        return null;
     }
 
     public static void removeMessage(int id) {

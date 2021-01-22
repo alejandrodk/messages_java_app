@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class MessageService {
@@ -18,8 +19,8 @@ public class MessageService {
         MessageDAO.createMessage(msg);
     }
 
-    public static void listMessages() {
-
+    public static List<Message> listMessages() {
+        return MessageDAO.readMessages();
     }
 
     public static void removeMessage() {

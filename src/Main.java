@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -23,7 +24,11 @@ public class Main {
                     MessageService.createMessage();
                     break;
                 case 2:
-                    MessageService.listMessages();
+                    List<Message> messages = MessageService.listMessages();
+                    for (Message item : messages) {
+                        System.out.println(item.toString());
+                    }
+                    System.out.println("Messages listed successfully");
                     break;
                 case 3:
                     MessageService.updateMessage();
