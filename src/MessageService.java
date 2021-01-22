@@ -39,6 +39,14 @@ public class MessageService {
     }
 
     public static void removeMessage() {
+        System.out.println("Update a message");
 
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Type message id");
+        String id = sc.nextLine();
+
+        MessageDAO.removeMessage(id);
+        System.out.println("Message deleted successfully");
     }
 }

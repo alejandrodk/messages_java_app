@@ -54,10 +54,6 @@ public class MessageDAO {
         return null;
     }
 
-    public static void removeMessage(int id) {
-
-    }
-
     public static void updateMessage(String id, String message) {
         DBConnection connection = new DBConnection();
         try (Connection conn = connection.get_connection()){
@@ -69,6 +65,24 @@ public class MessageDAO {
                 ps = conn.prepareStatement(query);
                 ps.setString(1, message);
                 ps.setString(2, id);
+                ps.executeUpdate();
+            } catch(SQLException exception) {
+                System.out.println(exception);
+            }
+        } catch(SQLException error){
+            System.out.println(error);
+        }
+    }
+
+    public static void removeMessage(String id) {
+        DBConnection connection = new DBConnection();
+        try (Connection conn = connection.get_connection()){
+            PreparedStatement ps = null;
+
+            try {
+                String query = "DELETE FROM mensajes WHERE id = ?";
+                ps = conn.prepareStatement(query);
+                ps.setString(1, id);
                 ps.executeUpdate();
             } catch(SQLException exception) {
                 System.out.println(exception);
