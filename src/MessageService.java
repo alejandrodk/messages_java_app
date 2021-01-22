@@ -23,11 +23,22 @@ public class MessageService {
         return MessageDAO.readMessages();
     }
 
-    public static void removeMessage() {
+    public static void updateMessage() {
+        System.out.println("Update a message");
 
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Type message id");
+        String id = sc.nextLine();
+
+        System.out.println("Type new message value");
+        String message = sc.nextLine();
+
+        MessageDAO.updateMessage(id, message);
+        System.out.println("Message updated successfully");
     }
 
-    public static void updateMessage() {
+    public static void removeMessage() {
 
     }
 }
